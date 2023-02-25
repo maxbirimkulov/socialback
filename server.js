@@ -4,7 +4,15 @@ import cors from 'cors'
 import handleValidatorErrors from "./utils/handleValidatorErrors.js";
 import mongoose from 'mongoose'
 
-import {getAllUser, getMe, login, register} from "./controllers/UserController.js";
+import {
+    acceptRequest, cancelMYRequest,
+    cancelRequest,
+    getAllUser,
+    getMe,
+    login,
+    register,
+    sendRequest
+} from "./controllers/UserController.js";
 
 
 mongoose.connect('mongodb+srv://maxbirimkulov:020599maks@itrunsocial.0y7gues.mongodb.net/?retryWrites=true&w=majority')
@@ -43,6 +51,14 @@ server.post('/auth/login', handleValidatorErrors, login)
 server.post('/auth/register',  register )
 server.get('/users/:id',  getMe )
 server.get('/users',  getAllUser )
+
+server.patch('/request/add', acceptRequest)
+server.patch('/request/cancel', cancelRequest)
+server.patch('/request/mycancel', cancelMYRequest)
+server.patch('/request/:id', sendRequest)
+
+
+
 
 
 

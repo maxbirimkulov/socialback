@@ -40,6 +40,18 @@ const UserSchema = new mongoose.Schema({
     photos: {
         type: Array,
         default: []
+    },
+    notification: {
+        type: Array,
+        default: []
+    },
+    friends: {
+        type: Array,
+        default: []
+    },
+    requests: {
+        type: Array,
+        default: []
     }
 }, {
     timestamps: true,
