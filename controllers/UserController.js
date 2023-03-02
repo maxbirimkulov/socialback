@@ -304,6 +304,41 @@ export const addPhoto = async (req, res) => {
     }
 }
 
+export const addPost = async (req, res) => {
+    try {
+        const userId = req.params.id
+        const user = await UserModel.findById(userId)
+
+        UserModel.findByIdAndUpdate({
+            _id: userId
+        }, {
+            posts : [...user.posts, req.body]
+        } ,{
+            returnDocument: 'after',
+        },(err, doc) => {
+            if (err) {
+                console.log(err)
+                return  res.status(500).json({
+                    message: 'Не удалось добавить пост'
+                })
+            }
+            if (!doc) {
+                return res.status(404).json({
+                    message: 'Юзер не найден'
+                })
+            }
+            res.json(doc)
+        })
+    } catch (err) {
+        console.log(err)
+        res.status(500).json({
+            message: 'Не удалось отправить запрос '
+        }, {
+            returnDocument: 'after',
+        })
+    }
+}
+
 
 
 export const acceptRequest = async (req, res) => {

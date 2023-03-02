@@ -8,6 +8,7 @@ import {
     acceptRequest, addPhoto, cancelMYRequest,
     cancelRequest,
     getAllUser,
+    addPost,
     getMe,
     login,
     register,
@@ -50,6 +51,7 @@ server.post('/upload',  upload.single('image'), (req, res) => {
 server.post('/auth/login', handleValidatorErrors, login)
 server.post('/auth/register',  register )
 server.patch('/users/:id/addphoto', addPhoto)
+server.patch('/users/:id/addpost', addPost)
 server.get('/users/:id',  getMe )
 server.get('/users',  getAllUser )
 
